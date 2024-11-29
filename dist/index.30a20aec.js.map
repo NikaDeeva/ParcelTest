@@ -1,0 +1,1 @@
+{"mappings":"ACAA,MAAM","sources":["<anon>","src/index.js"],"sourcesContent":["alert(\"Hello Parcel\");\n\n//# sourceMappingURL=index.30a20aec.js.map\n","alert(\"Hello Parcel\");\n"],"names":["alert"],"version":3,"file":"index.30a20aec.js.map"}
