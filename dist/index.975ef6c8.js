@@ -596,27 +596,44 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"8lqZg":[function(require,module,exports,__globalThis) {
-const average = require("835e9586db76357c");
-const numbers = [
-    1,
-    2,
-    3,
-    4,
-    5
-];
-const avg = average(numbers);
-console.log(`Average: ${avg}`);
+// const average = require('./average');
+// const numbers = [1, 2, 3, 4, 5];
+// const avg = average(numbers);
+// console.log(`Average: ${avg}`);
+var _averageJs = require("./average.js");
+const btn = document.querySelector('#btn');
+btn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const name = document.querySelector('#name');
+    const mail = document.querySelector('#mail');
+    const message = document.querySelector('#message');
+    if (message.value.trim().length === 0 || name.value.trim().length === 0 || mail.value.trim().length === 0) {
+        alert('Fill all labels');
+        return;
+    }
+    (0, _averageJs.datas).name = name.value;
+    (0, _averageJs.datas).mail = mail.value;
+    (0, _averageJs.datas).message = message.value;
+    alert('Datas received');
+});
 
-},{"835e9586db76357c":"4SEBZ"}],"4SEBZ":[function(require,module,exports,__globalThis) {
+},{"./average.js":"4SEBZ"}],"4SEBZ":[function(require,module,exports,__globalThis) {
+// export function average(numbers) {
+//     if (!Array.isArray(numbers) || numbers.length === 0){
+//        alert('Error');
+//     }
+//     const sum = numbers.reduce((acc, num) => acc + num, 0);
+//     return sum / numbers.length;
+// }
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "average", ()=>average);
-function average(numbers) {
-    if (!Array.isArray(numbers) || numbers.length === 0) alert('Error');
-    const sum = numbers.reduce((acc, num)=>acc + num, 0);
-    return sum / numbers.length;
-}
-module.exports = average;
+parcelHelpers.export(exports, "datas", ()=>datas);
+const datas = {
+    name: '',
+    mail: '',
+    message: ''
+};
+console.log(datas);
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
