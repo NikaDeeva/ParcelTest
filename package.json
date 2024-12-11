@@ -4,13 +4,24 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "parcel": "^2.13.2"
-  }
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "parcel-plugin-handlebars": "^0.4.4"
+  },
+  "extends": "@parcel/config-default",
+  "transformers": {
+    "*.hbs": [
+      "@parcel/transformer-handlebars"
+    ]
+  },
+  "main": "index.js"
 }
