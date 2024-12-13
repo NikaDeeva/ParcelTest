@@ -1,4 +1,4 @@
-import Handlebars from "handlebars";
+import Handlebars from 'handlebars';
 const users = [
   { name: "Олексій", age: 30, city: "Київ" },
   { name: "Марина", age: 25, city: "Львів" },
