@@ -1,0 +1,16 @@
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+.input-wrap{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    margin-top: 15px;
+    padding: 10px 15px;
+    max-width: 150px;
+}
+
+/*# sourceMappingURL=/style.e308ff8e.css.map */

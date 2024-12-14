@@ -8780,17 +8780,38 @@ var users = [{
   age: 35,
   city: "Одеса"
 }];
-var templateSource = "\n    <ul>\n        {{#each this}}\n        <li>{{name}}, {{age}} years, {{city}}</li>\n        {{/each}}\n    </ul>";
+var templateSource = "\n  <ul>\n      {{#each this}}\n      <li>{{name}}, {{age}} \u0440\u043E\u043A\u0456\u0432, {{city}}</li>\n      {{/each}}\n  </ul>";
 var template = _handlebars.default.compile(templateSource);
 document.getElementById('app').innerHTML = template(users);
-var filtereData = function filtereData(query) {
+var filterDataName = function filterDataName(query) {
   var filteredUsers = users.filter(function (user) {
     return user.name.toLowerCase().includes(query.toLowerCase());
   });
   document.getElementById('app').innerHTML = template(filteredUsers);
 };
-document.getElementById('name-int').addEventListener('input', function (e) {
-  filtereData(e.target.value);
+document.getElementById('search-name').addEventListener('input', function (e) {
+  filterDataName(e.target.value);
+  //   if (filteredUsers.length === 0) return alert('This user does not exist');
+});
+var filterDataAge = function filterDataAge(query) {
+  var filteredUsers = users.filter(function (user) {
+    return user.age.toString().includes(query);
+  });
+  document.getElementById('app').innerHTML = template(filteredUsers);
+};
+document.getElementById('search-age').addEventListener('input', function (e) {
+  filterDataAge(e.target.value);
+  // if (filteredUsers.length === 0) return alert('This user does not exist');
+});
+var filterDataCity = function filterDataCity(query) {
+  var filteredUsers = users.filter(function (user) {
+    return user.city.toLowerCase().includes(query.toLowerCase());
+  });
+  document.getElementById('app').innerHTML = template(filteredUsers);
+};
+document.getElementById('search-city').addEventListener('input', function (e) {
+  filterDataCity(e.target.value);
+  // if (filteredUsers.length === 0) return alert('This user does not exist');
 });
 },{"handlebars":"../node_modules/handlebars/dist/cjs/handlebars.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -8817,7 +8838,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50426" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50076" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
