@@ -1,52 +1,36 @@
-import Handlebars from 'handlebars';
-
-const users = [
-  { name: "Олексій", age: 30, city: "Київ" },
-  { name: "Марина", age: 25, city: "Львів" },
-  { name: "Іван", age: 35, city: "Одеса" },
-];
-
-const templateSource = `
-  <ul>
-      {{#each this}}
-      <li>{{name}}, {{age}} років, {{city}}</li>
-      {{/each}}
-  </ul>`;
-
-const template = Handlebars.compile(templateSource);
-
-document.getElementById('app').innerHTML = template(users);
-
-const filterDataName = (query) => {
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(query.toLowerCase())
-  );
-  document.getElementById('app').innerHTML = template(filteredUsers);
-};
-
-document.getElementById('search-name').addEventListener('input', (e) => {
-  filterDataName(e.target.value);
-//   if (filteredUsers.length === 0) return alert('This user does not exist');
-});
-const filterDataAge = (query) => {
-    const filteredUsers = users.filter(user =>
-        user.age.toString().includes(query)
-    );
-    document.getElementById('app').innerHTML = template(filteredUsers);
-  };
+"use strict"
+const refs = {
+  searchForm: document.querySelector('.search'),
+  container: document.querySelector('.wrapper'),
+  list: document.querySelector('.articles'),
+  load: document.querySelector('[data-action="load-more"]')
+}
+refs.searchForm.addEventListener('submit', onSearch);
+refs.load.addEventListener('click', loadMore);
+let searchQuery;
+function onSearch(e){
+  e.preventDefault();
+ searchQuery = e.currentTarget.elements.query.value;
+  const options = {
+    headers: {
+      Authorization: "96611445a11e473daa4019771c28da7d"
+    },
   
-  document.getElementById('search-age').addEventListener('input', (e) => {
-    filterDataAge(e.target.value);
-    // if (filteredUsers.length === 0) return alert('This user does not exist');
-  });
-  const filterDataCity = (query) => {
-    const filteredUsers = users.filter(user =>
-      user.city.toLowerCase().includes(query.toLowerCase())
-    );
-    document.getElementById('app').innerHTML = template(filteredUsers);
   };
+  const url = `https://newsapi.org/v2/everything?q=${searchQuery}&language=en&pageSize=5&page=1`;
+  fetch(url, options)
+  .then(response => response.json())
+  .then(console.log);
+}
+function loadMore(){
+  const options = {
+    headers: {
+      Authorization: "96611445a11e473daa4019771c28da7d"
+    },
   
-  document.getElementById('search-city').addEventListener('input', (e) => {
-    filterDataCity(e.target.value);
-    // if (filteredUsers.length === 0) return alert('This user does not exist');
-  });
+  };
+  const url = `https://newsapi.org/v2/everything?q=${searchQuery}&language=en&pageSize=5&page=1`;
+  fetch(url, options)
+  .then(response => response.json())
+  .then(console.log);
+}
