@@ -49,3 +49,30 @@ label{
     font-weight: 500;
     cursor: pointer;
 }
+.js-articles li {
+    background: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.js-articles a {
+    text-decoration: none;
+    color: black;
+    display: block;
+}
+
+.js-articles img {
+    display: block;
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}

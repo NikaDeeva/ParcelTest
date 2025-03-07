@@ -1,36 +1,34 @@
 "use strict"
+import NewApiService from './search';
+
 const refs = {
   searchForm: document.querySelector('.search'),
   container: document.querySelector('.wrapper'),
   list: document.querySelector('.articles'),
   load: document.querySelector('[data-action="load-more"]')
 }
+const newsApiService = new NewApiService();
 refs.searchForm.addEventListener('submit', onSearch);
 refs.load.addEventListener('click', loadMore);
-let searchQuery;
 function onSearch(e){
   e.preventDefault();
- searchQuery = e.currentTarget.elements.query.value;
-  const options = {
-    headers: {
-      Authorization: "96611445a11e473daa4019771c28da7d"
-    },
+  cleanArticles();
+ newsApiService.query = e.currentTarget.elements.query.value;
+ newsApiService.reset();
+ newsApiService.fetchArticles().then(articleMarkup);
   
-  };
-  const url = `https://newsapi.org/v2/everything?q=${searchQuery}&language=en&pageSize=5&page=1`;
-  fetch(url, options)
-  .then(response => response.json())
-  .then(console.log);
 }
 function loadMore(){
-  const options = {
-    headers: {
-      Authorization: "96611445a11e473daa4019771c28da7d"
-    },
-  
-  };
-  const url = `https://newsapi.org/v2/everything?q=${searchQuery}&language=en&pageSize=5&page=1`;
-  fetch(url, options)
-  .then(response => response.json())
-  .then(console.log);
+  newsApiService.fetchArticles().then(articleMarkup);
+}
+function articleMarkup(articles){
+  console.log(articles);
+const source = document.getElementById('articles-template').innerHTML;
+const template = Handlebars.compile(source);
+const markUp = template(articles);
+refs.list.insertAdjacentHTML('beforeend', markUp);
+
+}
+function cleanArticles(){
+  refs.list.innerHTML = '';
 }
