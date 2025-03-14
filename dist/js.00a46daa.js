@@ -117,100 +117,80 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/search.js":[function(require,module,exports) {
+})({"js/index.js":[function(require,module,exports) {
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var NewApiService = exports.default = /*#__PURE__*/function () {
-  function NewApiService() {
-    _classCallCheck(this, NewApiService);
-    this.searchQuery = '';
-    this.page = 1;
+var BASE_URL = 'http://localhost:3000/students';
+
+// fetch(BASE_URL)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// fetch(`${BASE_URL}/1`)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// const newSt = {
+//   name: 'Miranda Vera',
+//   age: 20,
+//   email: 'miranda.vera@gmail.com',
+//   phone: '555-3821',
+// };
+// const options = {
+//   method: 'POST',
+//   body: JSON.stringify(newSt),
+//   headers: {
+//   "Content-Type": "application/json"
+//   }
+// };
+// fetch(BASE_URL, options)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// fetch(BASE_URL)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// const st = {
+//   name: 'Miranda Vera',
+//   age: 20,
+//   email: 'miranda.vera@gmail.com',
+//   phone: '555-3821',
+// }
+// const options = {
+//   method: 'PUT',
+//   body: JSON.stringify(st),
+//   headers: {
+// "Content-Type": "application/json"
+//   }
+// }
+// fetch(`${BASE_URL}/2`, options)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+var options = {
+  method: 'PATCH',
+  body: JSON.stringify({
+    age: 100,
+    email: 'feature@gmail.com'
+  }),
+  headers: {
+    "Content-Type": "application/json"
   }
-  return _createClass(NewApiService, [{
-    key: "fetchArticles",
-    value: function fetchArticles() {
-      var _this = this;
-      console.log('Actual search:', this.searchQuery);
-      var options = {
-        headers: {
-          Authorization: "96611445a11e473daa4019771c28da7d"
-        }
-      };
-      var url = "https://newsapi.org/v2/everything?q=".concat(this.searchQuery, "&language=en&pageSize=5&page=").concat(this.page);
-      return fetch(url, options).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        console.log('Data', data.articles);
-        _this.incrementPage();
-        return data.articles || [];
-      });
-    }
-  }, {
-    key: "incrementPage",
-    value: function incrementPage() {
-      this.page += 1;
-    }
-  }, {
-    key: "reset",
-    value: function reset() {
-      this.page = 1;
-    }
-  }, {
-    key: "query",
-    get: function get() {
-      return this.searchQuery;
-    },
-    set: function set(newQuery) {
-      this.searchQuery = newQuery;
-    }
-  }]);
-}();
-;
-},{}],"js/index.js":[function(require,module,exports) {
-"use strict";
-
-var _search = _interopRequireDefault(require("./search"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
-var refs = {
-  searchForm: document.querySelector('.search'),
-  container: document.querySelector('.wrapper'),
-  list: document.querySelector('.articles'),
-  load: document.querySelector('[data-action="load-more"]')
 };
-var newsApiService = new _search.default();
-refs.searchForm.addEventListener('submit', onSearch);
-refs.load.addEventListener('click', loadMore);
-function onSearch(e) {
-  e.preventDefault();
-  cleanArticles();
-  newsApiService.query = e.currentTarget.elements.query.value;
-  newsApiService.reset();
-  newsApiService.fetchArticles().then(articleMarkup);
-}
-function loadMore() {
-  newsApiService.fetchArticles().then(articleMarkup);
-}
-function articleMarkup(articles) {
-  console.log(articles);
-  var source = document.getElementById('articles-template').innerHTML;
-  var template = Handlebars.compile(source);
-  var markUp = template(articles);
-  refs.list.insertAdjacentHTML('beforeend', markUp);
-}
-function cleanArticles() {
-  refs.list.innerHTML = '';
-}
-},{"./search":"js/search.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+fetch("".concat(BASE_URL, "/3"), options).then(function (r) {
+  return r.json();
+}).then(function (data) {
+  return console.log(data);
+}).catch(function (error) {
+  return console.error(error);
+});
+},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -235,7 +215,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52533" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50605" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

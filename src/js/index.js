@@ -1,34 +1,68 @@
 "use strict"
-import NewApiService from './search';
+const BASE_URL = 'http://localhost:3000/students';
 
-const refs = {
-  searchForm: document.querySelector('.search'),
-  container: document.querySelector('.wrapper'),
-  list: document.querySelector('.articles'),
-  load: document.querySelector('[data-action="load-more"]')
-}
-const newsApiService = new NewApiService();
-refs.searchForm.addEventListener('submit', onSearch);
-refs.load.addEventListener('click', loadMore);
-function onSearch(e){
-  e.preventDefault();
-  cleanArticles();
- newsApiService.query = e.currentTarget.elements.query.value;
- newsApiService.reset();
- newsApiService.fetchArticles().then(articleMarkup);
-  
-}
-function loadMore(){
-  newsApiService.fetchArticles().then(articleMarkup);
-}
-function articleMarkup(articles){
-  console.log(articles);
-const source = document.getElementById('articles-template').innerHTML;
-const template = Handlebars.compile(source);
-const markUp = template(articles);
-refs.list.insertAdjacentHTML('beforeend', markUp);
+// fetch(BASE_URL)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
 
-}
-function cleanArticles(){
-  refs.list.innerHTML = '';
-}
+// fetch(`${BASE_URL}/1`)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// const newSt = {
+//   name: 'Miranda Vera',
+//   age: 20,
+//   email: 'miranda.vera@gmail.com',
+//   phone: '555-3821',
+// };
+// const options = {
+//   method: 'POST',
+//   body: JSON.stringify(newSt),
+//   headers: {
+//   "Content-Type": "application/json"
+//   }
+// };
+// fetch(BASE_URL, options)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// fetch(BASE_URL)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+// const st = {
+//   name: 'Miranda Vera',
+//   age: 20,
+//   email: 'miranda.vera@gmail.com',
+//   phone: '555-3821',
+// }
+// const options = {
+//   method: 'PUT',
+//   body: JSON.stringify(st),
+//   headers: {
+// "Content-Type": "application/json"
+//   }
+// }
+// fetch(`${BASE_URL}/2`, options)
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(error => console.error(error));
+
+const options = {
+  method: 'PATCH',
+  body: JSON.stringify({
+    age: 100,
+    email: 'feature@gmail.com'
+  }),
+  headers: {
+    "Content-Type": "application/json"
+      }
+};
+fetch(`${BASE_URL}/3`, options)
+.then(r => r.json())
+.then(data => console.log(data))
+.catch(error => console.error(error));
