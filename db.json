@@ -1,81 +1,14 @@
 {
-  "students": [
-    {
-      "id": "1",
-      "name": "John Doe",
-      "age": 20,
-      "email": "john.doe@example.com",
-      "phone": "555-1234"
-    },
-    {
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821",
-      "id": "2"
-    },
-    {
-      "id": "3",
-      "name": "Bob Johnson",
-      "age": 100,
-      "email": "feature@gmail.com",
-      "phone": "555-9012"
-    },
-    {
-      "id": "83b5",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "fc2c",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "6d0e",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "4b18",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "afd5",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "486a",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "8317",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    },
-    {
-      "id": "e431",
-      "name": "Miranda Vera",
-      "age": 20,
-      "email": "miranda.vera@gmail.com",
-      "phone": "555-3821"
-    }
+  "posts": [
+   {
+    "id": 1,
+    "title": "Title 1",
+    "text": "text 1",
+    "comments": [
+      {
+        "content": "text"
+      }
+    ]
+   }
   ]
 }
