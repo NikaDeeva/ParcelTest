@@ -22,7 +22,8 @@ async function createPost(title, content) {
       }
     }
     const r = fetch(`${BASE_URL}`, options);
-    console.log(r.json());
+    const data = await r.json();
+    await startApp();
         } catch (error) {
     console.error(error);
   }
@@ -55,8 +56,8 @@ async function createComment(postId, comment) {
 
 // Оновлення відображення постів на сторінці
 function renderPosts(posts) {
-  const comments = posts.comments;
   const markUp = posts.map(post => {
+    const comments = posts.comments;
     return ` <div class="post">
       <h2 class="postTitle">${post.title}</h2>
       <p class="postText">${post.text}</p>
