@@ -1,24 +1,22 @@
 {
   "posts": [
-   {
-    "id": 1,
-    "title": "Title 1",
-    "text": "text 1",
-    "comments": [
-      {
-        "content": "text"
-      }
-    ]
-   },
-   {
-    "id": 2,
-    "title": "Title 2",
-    "text": "text 2",
-    "comments":[
-      {
-        "content": "text"
-      }
-    ]
-   }
+    {
+      "id": "1",
+      "title": "hfj ui rr rioyer yu",
+      "text": "fio gupf ",
+      "comments": []
+    },
+    {
+      "id": "2",
+      "title": "hfj ui rr rioyer yu",
+      "text": "fio gupf ",
+      "comments": []
+    },
+    {
+      "id": "aa71",
+      "title": "JavaScript",
+      "text": "we vsul ghsl",
+      "comments": []
+    }
   ]
 }

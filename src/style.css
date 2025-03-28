@@ -37,3 +37,8 @@ align-items: center;
     cursor: pointer;
     font-weight: 500;
 }
+.updatingForm{
+    display: none;
+    background-color: aqua;
+    padding: 20px 30px;
+}
