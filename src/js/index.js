@@ -86,11 +86,6 @@ function renderPosts(posts) {
           <button type="submit">Додати коментар</button>
         </form>
       </div>
-      <form class="updatingForm">
-    <input type="text" id="titleEdit" placeholder="Заголовок" required>
-    <textarea id="contentEdit" placeholder="Зміст" required></textarea>
-    <button class="updateButton" data-id="${post.id}">Редагувати</button>
-  </form>
     </div>`;
   });
 document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp);
@@ -103,25 +98,36 @@ document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp
   createPost(title, content);
  });
 
-// // Обробник події для редагування поста
-document.querySelector('#postsContainer').addEventListener('click', (e) => {
+ document.querySelector('#postsContainer').addEventListener('click', (e) => {
   let currentPostId = null;
   if (e.target.nodeName !== 'DIV'){
     currentPostId = e.target.dataset.id;
-    document.querySelector('.updatingForm').style.display = 'block';
-    // document.querySelector('.updateButton').addEventListener('click', () => {
-    //   const title = document.querySelector('#titleEdit').value;
-    //     const content = document.querySelector('#contentEdit').value;
-    //     updatePost(postId, title, content);
-    //     console.log(postId);
-        // return;
-    // });
-    // document.querySelector('.updateButton').addEventListener('click', () => {
-    //   let currentPostId = e.target.closest('.post');
-    //   document.querySelector(`${currentPostId}`)
-    // })
+    document.querySelector('.editPostButton').addEventListener('click', (e) => {
+      const title = prompt('New title');
+      const text = prompt('New text');
+      updatePost(currentPostId, title, text);
+     })
   }
-});
+ });
+// // Обробник події для редагування поста
+// document.querySelector('#postsContainer').addEventListener('click', (e) => {
+//   let currentPostId = null;
+//   if (e.target.nodeName !== 'DIV'){
+//     currentPostId = e.target.dataset.id;
+//     document.querySelector('.updatingForm').style.display = 'block';
+//     // document.querySelector('.updateButton').addEventListener('click', () => {
+//     //   const title = document.querySelector('#titleEdit').value;
+//     //     const content = document.querySelector('#contentEdit').value;
+//     //     updatePost(postId, title, content);
+//     //     console.log(postId);
+//         // return;
+//     // });
+//     // document.querySelector('.updateButton').addEventListener('click', () => {
+//     //   let currentPostId = e.target.closest('.post');
+//     //   document.querySelector(`${currentPostId}`)
+//     // })
+//   }
+// });
 
 // const editForm = document.querySelector(".updatingForm");
 // editForm.addEventListener('submit', (e) => {

@@ -2,8 +2,8 @@
   "posts": [
     {
       "id": "1",
-      "title": "hfj ui rr rioyer yu",
-      "text": "fio gupf ",
+      "title": "Title",
+      "text": "Text",
       "comments": []
     },
     {
@@ -14,8 +14,14 @@
     },
     {
       "id": "aa71",
-      "title": "JavaScript",
-      "text": "we vsul ghsl",
+      "title": "",
+      "text": "",
+      "comments": []
+    },
+    {
+      "id": "b465",
+      "title": "",
+      "text": "",
       "comments": []
     }
   ]
