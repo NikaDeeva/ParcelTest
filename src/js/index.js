@@ -51,6 +51,12 @@ async function updatePost(id, title, content) {
 // Видалення поста
 async function deletePost(id) {
   try {
+    const options = {
+      method: 'DELETE',
+    }
+    const r = fetch(`${BASE_URL}/${id}`, options);
+    const data = await r.json();
+    await startApp();
          } catch (error) {
     console.error(error);
   }
@@ -72,8 +78,8 @@ function renderPosts(posts) {
     return ` <div class="post">
       <h2 class="postTitle">${post.title}</h2>
       <p class="postText">${post.text}</p>
-      <button class="deletePostButton" data-id="${post.id}">Видалити</button>
       <button class="editPostButton" data-id="${post.id}">Редагувати</button>
+      <button class="deletePostButton" data-id="${post.id}">Видалити</button>
       <div class="commentsContainer" data-id="${post.id}">
         <h3>Коментарі:</h3>
         <ul>
@@ -83,7 +89,7 @@ function renderPosts(posts) {
         </ul>
         <form class="createCommentForm">
           <input type="text" class="commentInput" placeholder="Новий коментар" required>
-          <button type="submit">Додати коментар</button>
+          <button class="addCommentButton" type="submit">Додати коментар</button>
         </form>
       </div>
     </div>`;
@@ -100,15 +106,18 @@ document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp
 
  document.querySelector('#postsContainer').addEventListener('click', (e) => {
   let currentPostId = null;
-  if (e.target.nodeName !== 'DIV'){
+
+  if (e.target.classList.contains('deletePostButton')) {
     currentPostId = e.target.dataset.id;
-    document.querySelector('.editPostButton').addEventListener('click', (e) => {
-      const title = prompt('New title');
-      const text = prompt('New text');
-      updatePost(currentPostId, title, text);
-     })
+    deletePost(currentPostId); 
   }
- });
+  if (e.target.classList.contains('editPostButton')) {
+    currentPostId = e.target.dataset.id;
+    const title = prompt('New title');
+    const text = prompt('New text');
+    updatePost(currentPostId, title, text);
+  }
+});
 // // Обробник події для редагування поста
 // document.querySelector('#postsContainer').addEventListener('click', (e) => {
 //   let currentPostId = null;
@@ -139,8 +148,6 @@ document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp
 //   updatePost(id, title, content);
 // });
 
-// // Обробник події для видалення поста
-// document.addEventListener('click', cb);
 
 // // Обробник події для додавання коментаря
 // document.addEventListener('submit', cb);

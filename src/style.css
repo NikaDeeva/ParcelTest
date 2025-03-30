@@ -37,8 +37,51 @@ align-items: center;
     cursor: pointer;
     font-weight: 500;
 }
-.updatingForm{
-    display: none;
-    background-color: aqua;
+#postsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+}
+.post{
     padding: 20px 30px;
+    border: 3px solid darkblue;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.postTitle{
+    text-align: center;
+    text-transform: capitalize;
+}
+.editPostButton,
+.deletePostButton{
+    padding: 10px 20px;
+    background-color: navy;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 5px;
+}
+.commentInput{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: beige;
+    color: black;
+}
+.addCommentButton{
+    padding: 10px 5px;
+    background-color: navy;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 5px;
 }

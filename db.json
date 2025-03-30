@@ -1,27 +1,21 @@
 {
   "posts": [
     {
-      "id": "1",
-      "title": "Title",
-      "text": "Text",
-      "comments": []
-    },
-    {
       "id": "2",
-      "title": "hfj ui rr rioyer yu",
-      "text": "fio gupf ",
+      "title": "Хеллооооо",
+      "text": "Гайс",
       "comments": []
     },
     {
       "id": "aa71",
-      "title": "",
-      "text": "",
+      "title": "Post",
+      "text": "Ya lublu javascript",
       "comments": []
     },
     {
       "id": "b465",
-      "title": "",
-      "text": "",
+      "title": "Lulu",
+      "text": "meeeoooowwww",
       "comments": []
     }
   ]
