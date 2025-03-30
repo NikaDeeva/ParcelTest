@@ -65,7 +65,20 @@ async function deletePost(id) {
 // Додавання коментаря до поста
 async function createComment(postId, comment) {
   try {
-         
+    if (!comment) {
+      console.error("Write a comment");
+      return;
+    }
+         const options = {
+          method: 'POST',
+          body: JSON.stringify({ "content": comment }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+         }
+         const r = await fetch(`${BASE_URL}/${postId}/comments`, options);
+         const data = await r.json();
+    await startApp();
   } catch (error) {
     console.error(error);
   }
@@ -96,7 +109,7 @@ function renderPosts(posts) {
   });
 document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp);
     }
-// Обробник події для створення поста
+
  document.getElementById('createPostForm').addEventListener('submit', (e) => {
   e.preventDefault();
   const title = document.querySelector('#titleInput').value;
@@ -117,41 +130,14 @@ document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp
     const text = prompt('New text');
     updatePost(currentPostId, title, text);
   }
+  if (e.target.classList.contains('addCommentButton')){
+    currentPostId = e.target.dataset.id;
+    const comment = document.querySelector('.commentInput').value;
+createComment(currentPostId, comment);
+comment.value = '';
+  }
 });
-// // Обробник події для редагування поста
-// document.querySelector('#postsContainer').addEventListener('click', (e) => {
-//   let currentPostId = null;
-//   if (e.target.nodeName !== 'DIV'){
-//     currentPostId = e.target.dataset.id;
-//     document.querySelector('.updatingForm').style.display = 'block';
-//     // document.querySelector('.updateButton').addEventListener('click', () => {
-//     //   const title = document.querySelector('#titleEdit').value;
-//     //     const content = document.querySelector('#contentEdit').value;
-//     //     updatePost(postId, title, content);
-//     //     console.log(postId);
-//         // return;
-//     // });
-//     // document.querySelector('.updateButton').addEventListener('click', () => {
-//     //   let currentPostId = e.target.closest('.post');
-//     //   document.querySelector(`${currentPostId}`)
-//     // })
-//   }
-// });
 
-// const editForm = document.querySelector(".updatingForm");
-// editForm.addEventListener('submit', (e) => {
-//   e.preventDefault();
-//   // const id = e.target.contains.;
-// if (e.target.classList.contains())
-//   const title = document.querySelector('#titleEdit').value;
-//   const content = document.querySelector('#contentEdit').value;
-//   updatePost(id, title, content);
-// });
-
-
-// // Обробник події для додавання коментаря
-// document.addEventListener('submit', cb);
-// Запуск додатку
 async function startApp() {
   const posts = await getPosts();
   renderPosts(posts);
