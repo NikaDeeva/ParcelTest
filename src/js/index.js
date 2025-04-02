@@ -65,20 +65,35 @@ async function deletePost(id) {
 // Додавання коментаря до поста
 async function createComment(postId, comment) {
   try {
-    if (!comment) {
-      console.error("Write a comment");
-      return;
-    }
-         const options = {
-          method: 'POST',
-          body: JSON.stringify({ "content": comment }),
-          headers: {
-            "Content-Type": "application/json"
-          }
-         }
-         const r = await fetch(`${BASE_URL}/${postId}/comments`, options);
-         const data = await r.json();
+    const rPost = await fetch(`${BASE_URL}/${postId}`);
+    const data = await rPost.json();
+    data.comments.push({text: comment});
+    console.log(data);
+  
+    const options = {
+      method: 'PATCH',
+      bodyEl: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    const r = await fetch(`${BASE_URL}/${postId}`, options);
+    const res = await r.json();
     await startApp();
+        // if (!comment) {
+    //   console.error("Write a comment");
+    //   return;
+    // }
+    //      const options = {
+    //       method: 'POST',
+    //       body: JSON.stringify({ "content": comment }),
+    //       headers: {
+    //         "Content-Type": "application/json"
+    //       }
+    //      }
+    //      const r = await fetch(`${BASE_URL}/${postId}/comments`, options);
+    //      const data = await r.json();
+    // await startApp();
   } catch (error) {
     console.error(error);
   }
@@ -93,18 +108,16 @@ function renderPosts(posts) {
       <p class="postText">${post.text}</p>
       <button class="editPostButton" data-id="${post.id}">Редагувати</button>
       <button class="deletePostButton" data-id="${post.id}">Видалити</button>
-      <div class="commentsContainer" data-id="${post.id}">
         <h3>Коментарі:</h3>
         <ul>
             ${comments.map(comment => {
-              return `<li>${comment.content}</li>`;
+              return `<li>${comment.text}</li>`;
             }).join("")}
         </ul>
         <form class="createCommentForm">
           <input type="text" class="commentInput" placeholder="Новий коментар" required>
           <button class="addCommentButton" type="submit">Додати коментар</button>
         </form>
-      </div>
     </div>`;
   });
 document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp);
@@ -117,26 +130,43 @@ document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp
   createPost(title, content);
  });
 
- document.querySelector('#postsContainer').addEventListener('click', (e) => {
+ document.querySelector('#postsContainer').addEventListener('click', async (e) => {
+  
+  e.preventDefault();
   let currentPostId = null;
 
   if (e.target.classList.contains('deletePostButton')) {
     currentPostId = e.target.dataset.id;
-    deletePost(currentPostId); 
+    await deletePost(currentPostId); 
   }
   if (e.target.classList.contains('editPostButton')) {
     currentPostId = e.target.dataset.id;
     const title = prompt('New title');
     const text = prompt('New text');
-    updatePost(currentPostId, title, text);
+    await updatePost(currentPostId, title, text);
   }
-  if (e.target.classList.contains('addCommentButton')){
-    currentPostId = e.target.dataset.id;
-    const comment = document.querySelector('.commentInput').value;
-createComment(currentPostId, comment);
-comment.value = '';
-  }
+//   if (e.target.classList.contains('addCommentButton')){
+//     const postEl = e.target.closest('.post');
+//     const elId = postEl.querySelector('[data-id]');
+//     currentPostId = elId.dataset.id;
+//     const comment = postEl.querySelector('.commentInput').value;
+// await createComment(currentPostId, comment);
+// console.log(currentPostId, comment);
+// postEl.querySelector('.commentInput').value = '';
+//   }
 });
+
+document.querySelector('#postsContainer').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  let currentPostId = null;
+  const postEl = e.target.closest('.post');
+      const elId = postEl.querySelector('[data-id]');
+      currentPostId = elId.dataset.id;
+      const comment = postEl.querySelector('.commentInput').value;
+  await createComment(currentPostId, comment);
+  console.log(currentPostId, comment);
+  postEl.querySelector('.commentInput').value = '';
+})
 
 async function startApp() {
   const posts = await getPosts();
