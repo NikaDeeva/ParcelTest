@@ -120,7 +120,9 @@ function renderPosts(posts) {
         </form>
     </div>`;
   });
-document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp);
+  document.getElementById('postsContainer').innerHTML = "";
+  document.getElementById('postsContainer').insertAdjacentHTML('beforeend', markUp);
+  
     }
 
  document.getElementById('createPostForm').addEventListener('submit', (e) => {
