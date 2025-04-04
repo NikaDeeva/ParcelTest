@@ -83,10 +83,10 @@ function renderPosts(posts) {
     return `<div class="post">
       <h2 class="postTitle">${post.title}</h2>
       <p class="postText">${post.text}</p>
-      <button class="editPostButton" data-id="${post.id} type="button">Редагувати</button>
-      <button class="deletePostButton" data-id="${post.id} type="button">Видалити</button>
+      <button class="editPostButton" data-id="${post.id}" type="button">Редагувати</button>
+      <button class="deletePostButton" data-id="${post.id}" type="button">Видалити</button>
         <h3>Коментарі:</h3>
-        <ul>
+        <ul class="commentsList">
             ${comments.map(comment => `<li>${comment.text}</li>`).join("")}
         </ul>
         <form class="createCommentForm" data-id="${post.id}">

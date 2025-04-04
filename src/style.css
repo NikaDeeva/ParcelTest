@@ -67,6 +67,17 @@ align-items: center;
     font-weight: 500;
     margin: 5px;
 }
+.commentsList{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+}
+.commentsList li{
+    padding: 5px;
+    font-size: 12px;
+}
 .commentInput{
     padding-top: 10px;
     padding-bottom: 10px;
